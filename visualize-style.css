@@ -1,0 +1,336 @@
+html,
+body {
+  margin: 0;
+  user-select: none;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  cursor: move;
+}
+
+#control-container {
+  display: flex;
+  left: 2.5vw;
+  top: 2.5vh;
+  position: absolute;
+  background-color: rgba(37, 33, 27, 0.575);
+  z-index: 100;
+  width: fit-content;
+  padding: 1vw;
+}
+
+select {
+  background-color: rgb(71, 64, 59);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2vw;
+  text-align: center;
+  transition: background-color 0.25s;
+  color: beige;
+  border: 2px beige solid;
+}
+
+select:hover {
+  cursor: pointer;
+  background-color: rgb(179, 137, 115);
+}
+
+#new-hit {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2vw;
+  text-align: center;
+  transition: background-color 0.25s, color 0.25s;
+  color: beige;
+  margin-left: 2vw;
+  background-color: rgb(27, 27, 26);
+  padding: 1vw;
+  border: 2px beige solid;
+}
+
+#new-hit:hover {
+  cursor: pointer;
+  background-color: rgb(187, 169, 169);
+  color: black;
+}
+
+#home-button {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2vw;
+  text-align: center;
+  transition: background-color 0.25s, color 0.25s;
+  color: beige;
+  margin-right: 2vw;
+  background-color: rgb(27, 27, 26);
+  padding: 1vw;
+  border: 2px beige solid;
+}
+
+#home-button:hover {
+  cursor: pointer;
+  background-color: rgb(148, 133, 133);
+  color: black;
+}
+
+#loading-message {
+  position: fixed;
+  width: 95vw;
+  height: 95vh;
+  background-color: rgb(43, 39, 39);
+  z-index: 1000;
+  left: 2.5vw;
+  top: 2.5vh;
+  border: 2px beige solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  cursor: progress;
+}
+
+#guess-container {
+  display: flex;
+  height: 15vh;
+  width: 100vh;
+  justify-content: space-around;
+  background-color: rgb(43, 39, 39);
+  position: fixed;
+  border: 2px beige solid;
+  z-index: 977;
+  left: calc(50vw - 42.5vh - 2vh);
+  bottom: 5vh;
+  padding: 2vh;
+}
+
+.player-option {
+  width: 30vh;
+  border: 2px beige solid;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 5vh;
+  text-align: center;
+  background-color: rgb(43, 39, 39);
+  transition: filter 0.15s, border 0.15s;
+}
+
+.player-option:hover {
+  cursor: pointer;
+  filter: invert(1);
+  border: 2px rgb(43, 39, 39) solid;
+}
+
+#upload-help {
+  position: fixed;
+  width: 95vw;
+  height: 95vh;
+  background-color: rgb(43, 39, 39);
+  z-index: 1000;
+  left: 2.5vw;
+  top: 2.5vh;
+  border: 2px beige solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#search-parameters {
+  position: fixed;
+  width: 95vw;
+  height: 95vh;
+  background-color: rgb(43, 39, 39);
+  z-index: 1000;
+  left: 2.5vw;
+  top: 2.5vh;
+  border: 2px beige solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#fields-container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.select-parameter {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 3vh;
+  text-align: center;
+  transition: background-color 0.25s, color 0.25s;
+  color: beige;
+  background-color: rgb(51, 51, 47);
+  padding: 1vh;
+  border: 2px beige solid;
+  width: fit-content;
+  height: fit-content;
+}
+
+.select-parameter:hover {
+  cursor: pointer;
+  background-color: rgb(207, 200, 188);
+  color: black;
+}
+
+.field-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+label {
+  margin: 0;
+  margin-right: 0.5vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 5vh;
+  text-align: center;
+  transition: background-color 0.25s, color 0.25s;
+  color: beige;
+  padding: 1vw;
+  width: fit-content;
+  height: fit-content;
+}
+
+
+#search-button {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 6vh;
+  text-align: center;
+  transition: background-color 0.25s, color 0.25s;
+  color: beige;
+  background-color: rgb(27, 27, 26);
+  padding: 1vw;
+  border: 2px beige solid;
+  width: fit-content;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#search-button:hover {
+  cursor: pointer;
+  background-color: rgb(187, 169, 169);
+  color: black;
+}
+
+#cancel-button {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 6vh;
+  text-align: center;
+  transition: background-color 0.25s, color 0.25s;
+  color: beige;
+  background-color: rgb(27, 27, 26);
+  padding: 1vw;
+  border: 2px beige solid;
+  width: fit-content;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#cancel-button:hover {
+  cursor: pointer;
+  background-color: rgb(184, 72, 72);
+  color: black;
+}
+
+h1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 7.5vh;
+  text-align: center;
+  transition: background-color 0.25s, color 0.25s;
+  color: beige;
+  background-color: rgb(27, 27, 26);
+  padding: 1vw;
+  border: 2px beige solid;
+  width: fit-content;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 3vh;
+  text-align: center;
+  transition: background-color 0.25s, color 0.25s;
+  color: beige;
+  background-color: rgb(27, 27, 26);
+  padding: 1vw;
+  border: 2px beige solid;
+  width: fit-content;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#search-results {
+  position: fixed;
+  width: 90vw;
+  height: 90vh;
+  background-color: rgb(43, 39, 39);
+  z-index: 1000;
+  left: 5vw;
+  top: 5vh;
+  border: 2px beige solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.result-cell {
+  width: 90%;
+  background-color: black;
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 3vh;
+  text-align: center;
+  transition: background-color 0.25s, color 0.25s;
+  color: beige;
+  background-color: rgb(27, 27, 26);
+  padding: 1vw;
+  border: 2px beige solid;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5vh;
+}
+
+.result-cell:hover {
+  background-color: beige;
+  color: black;
+  cursor: pointer;
+}
+
+#player-text-search {
+  margin: 0;
+  margin-right: 2vw;
+  width: 20vw;
+}
+
+#current-score {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15vh;
+  color: rgb(250, 188, 117);
+  z-index: 500;
+  position: fixed;
+  right: 0;
+  top: 0;
+  margin: 0;
+  background-color: black;
+}
+
+#best-score {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 8vh;
+  color: rgb(250, 188, 117);
+  z-index: 500;
+  position: fixed;
+  right: 0;
+  top: 17vh;
+  margin: 0;
+  background-color: black;
+}

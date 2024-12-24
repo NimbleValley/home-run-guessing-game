@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLB Home Run Guesser</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="display: flex; flex-direction: column;">
+    <div id="header">
+        <div id="header-container">
+            <button id="home-page-link" onclick="window.location.href='index.html'">MLB Home Run Guesser</button>
+            <div id="page-button-container">
+                <button id="visualizer-button" class="page-button" onclick="window.open('https://twitter.com/distancetracker')">Twitter</button>
+                <button id="visualizer-button" class="page-button" onclick="window.open('https://github.com/NimbleValley/home-run-guessing-game')">Github</button>
+            </div>
+        </div>
+    </div>
+
+    <h1>Home Run Guessing Game</h1>
+    <p> Guess which player hit the displayed home runs! Because they might not have appeared at the selected stadium, some may look like flyouts or doubles. Remember, all stadiums have different dimensions!
+    </p>
+    <button id="visualizer-button" class="page-button" style="scale: 1.25; width: fit-contents;" onclick="window.open('./game.html', '_self')">PLAY GAME</button>
+
+</body>
+
+</html>
