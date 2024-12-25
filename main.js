@@ -238,7 +238,7 @@ function renderHit(row, id) {
 function animate() {
   requestAnimationFrame(animate);
 
-  renderer.render(scene, camera);
+  //renderer.render(scene, camera);
 }
 
 animate();
@@ -326,6 +326,8 @@ function newRound() {
     tempText == playerName ? options[i].id = 'correct' : options[i].id = 'wrong';
     tempOptions.splice(current, 1);
   }
+
+  renderer.render(scene, camera);
 
   //console.log(playerName);
 }
