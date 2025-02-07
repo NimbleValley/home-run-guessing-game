@@ -69,11 +69,7 @@ renderer.render(scene, camera);
 //controls.update();
 
 
-const ballGeometry = new THREE.SphereGeometry(0.1, 32, 16, 100);
 const material = new THREE.MeshBasicMaterial({ color: 0xFF6347, wireframe: false });
-const ball = new THREE.Mesh(ballGeometry, material);
-
-scene.add(ball);
 
 const loader = new GLTFLoader();
 
@@ -116,7 +112,7 @@ for (let i = 0; i < options.length; i++) {
       }
     }
     if (this.id == 'correct') {
-      correctContainer.innerHTML = `<h2>Correct! Player was ${correctAnswer}.</h2>`;
+      correctContainer.innerHTML = `<h2>Correct! Player was ${correctAnswer}.</h2> <div id='waiting-bar'></div>`;
       correctContainer.style.display = 'flex';
       await sleep(4000);
       hideContainers();
@@ -128,7 +124,7 @@ for (let i = 0; i < options.length; i++) {
         bestScoreText.innerText = `Best: ${bestScore}`;
       }
     } else {
-      incorrectContainer.innerHTML = `<h2>Incorrect, player was ${correctAnswer}.</h2>`;
+      incorrectContainer.innerHTML = `<h2>Incorrect, player was ${correctAnswer}.</h2> <div id='waiting-bar'></div>`;
       incorrectContainer.style.display = 'flex';
       await sleep(4000);
       hideContainers();
@@ -205,29 +201,18 @@ function renderHit(row, id) {
   //Total Hang Time
   var total_time = (launch_speed_y + Math.sqrt(Math.pow(launch_speed_y, 2) + (2 * gravity * initialHeight))) / gravity;
 
-  ball.position.y = initialHeight * SCALE;
-
-  var landingGeometry = new THREE.SphereGeometry(0.25, 32, 16, 100);
-  const landing = new THREE.Mesh(landingGeometry, material);
-
-  landing.name = 'landing';
-  scene.add(landing);
-
-  landing.position.z = Math.cos(convert(spray)) * hitDistance * SCALE * -1;
-  landing.position.y = 0;
-  landing.position.x = Math.sin(convert(spray)) * hitDistance * SCALE * -1;
+  let landingZ = Math.cos(convert(spray)) * hitDistance * SCALE * -1;
+  let landingY = 0;
+  let landingX = Math.sin(convert(spray)) * hitDistance * SCALE * -1;
 
   var maxHeight = (-16.085 * Math.pow(total_time, 2)) + (launch_speed_fts * Math.sin(launch_angle) * (total_time / 2)) + (initialHeight * 2);
   for (let y = -0.1; y <= 0.1; y += 0.05) {
     for (let i = -0.1; i <= 0.1; i += 0.05) {
       let bezier = new THREE.QuadraticBezierCurve3(
         new THREE.Vector3(i, y, 0),
-        new THREE.Vector3(landing.position.x / 2 + i, maxHeight * SCALE * -1 * DISTANCE_SCALE + y, landing.position.z / 2),
-        new THREE.Vector3(landing.position.x + i, landing.position.y + y, landing.position.z)
+        new THREE.Vector3(landingX / 2 + i, maxHeight * SCALE * -1 * DISTANCE_SCALE + y, landingZ / 2),
+        new THREE.Vector3(landingX + i, landingY + y, landingZ)
       );
-
-      /*curve.points.push(new THREE.Vector3(landing.position.x / 2, 100 * SCALE, landing.position.z / 2));
-      curve.points.push(new THREE.Vector3(landing.position.x, landing.position.y, landing.position.z));*/
 
       let points = bezier.getPoints(50);
       let curveGeometry = new THREE.BufferGeometry().setFromPoints(points);

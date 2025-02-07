@@ -343,6 +343,7 @@ input {
   width: 100%;
   height: 100%;
   color: white;
+  flex-direction: column;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
   justify-content: center;
@@ -363,6 +364,7 @@ input {
   width: 100%;
   height: 100%;
   color: white;
+  flex-direction: column;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
   justify-content: center;
@@ -372,5 +374,25 @@ input {
     font-weight: normal;
     font-size: 5vh;
     margin: 0;
+  }
+}
+
+#waiting-bar {
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5%;
+  animation: wait 4s linear;
+}
+
+@keyframes wait {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
   }
 }
