@@ -34,7 +34,12 @@ camera.lookAt(0, 15, -50);
 var playerId;
 var year;
 
+const incorrectContainer = document.getElementById('incorrect-container');
+const correctContainer = document.getElementById('correct-container');
+hideContainers();
+
 //HDRI
+/*
 new RGBELoader()
   .load('textures/syferfontein_0d_clear_puresky_4k.hdr', function (texture) {
 
@@ -43,9 +48,7 @@ new RGBELoader()
     //scene.background = texture;
     scene.background = texture;
 
-    setUpStadium();
-  });
-
+  });*/
 //Renderer
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
@@ -78,6 +81,8 @@ var abb = 'AZ';
 var stadium;
 var previousAmount = 0;
 
+setUpStadium();
+
 function setUpStadium() {
   loader.load(`models/Stadium_${abb}.glb`, function (model) {
     stadium = model.scene;
@@ -103,7 +108,7 @@ const gravity = 32.174 * SCALE;
 
 const options = document.getElementsByClassName('player-option');
 for (let i = 0; i < options.length; i++) {
-  options[i].addEventListener('click', function () {
+  options[i].addEventListener('click', async function () {
     let correctAnswer = '';
     for(let i = 0; i < options.length; i ++) {
       if(options[i].id == 'correct') {
@@ -111,7 +116,10 @@ for (let i = 0; i < options.length; i++) {
       }
     }
     if (this.id == 'correct') {
-      alert('Correct!');
+      correctContainer.innerHTML = `<h2>Correct! Player was ${correctAnswer}.</h2>`;
+      correctContainer.style.display = 'flex';
+      await sleep(4000);
+      hideContainers();
       currentScore ++;
       currentScoreText.innerText = currentScore;
       if(currentScore > bestScore) {
@@ -120,7 +128,10 @@ for (let i = 0; i < options.length; i++) {
         bestScoreText.innerText = `Best: ${bestScore}`;
       }
     } else {
-      alert('Incorrect, player was ' + correctAnswer + '.');
+      incorrectContainer.innerHTML = `<h2>Incorrect, player was ${correctAnswer}.</h2>`;
+      incorrectContainer.style.display = 'flex';
+      await sleep(4000);
+      hideContainers();
       currentScore = 0;
       currentScoreText.innerText = currentScore;
     }
@@ -346,3 +357,12 @@ window.addEventListener('resize', () => {
 //https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfPT=&hfAB=single%7Cdouble%7Ctriple%7Chome%5C.%5C.run%7Cfield%5C.%5C.out%7C&hfGT=R%7C&hfPR=&hfZ=&hfStadium=&hfBBL=&hfNewZones=&hfPull=&hfC=&hfSea=2023%7C&hfSit=&player_type=batter&hfOuts=&hfOpponent=&pitcher_throws=&batter_stands=&hfSA=&game_date_gt=&game_date_lt=&hfMo=&hfTeam=&home_road=&hfRO=&position=&hfInfield=&hfOutfield=&hfInn=&hfBBT=fly%5C.%5C.ball%7Cline%5C.%5C.drive%7C&hfFlag=&metric_1=&group_by=name-date&min_pitches=0&min_results=0&min_pas=0&sort_col=pitches&metric_1=api_h_distance_projected&metric_1_gt=300&metric_1_lt=&player_event_sort=api_p_release_speed&sort_order=desc&min_abs=0&type=detals#results
 
 parseCSV(`./data/${2024}.csv`);
+
+function hideContainers() {
+  incorrectContainer.style.display = 'none';
+  correctContainer.style.display = 'none';
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
